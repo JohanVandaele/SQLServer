@@ -12,8 +12,8 @@ try
         .AddJsonFile("appsettings.json", false, true)
         .Build();
 
-    var connectionString = configuration.GetConnectionString("KlantenDB");
-
+    //var connectionString = configuration.GetConnectionString("KlantenDB");    // or
+    var connectionString = configuration["ConnectionStrings:KlantenDB"];        // or
     //var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Database.mdf;TrustServerCertificate=True";
 
     // ----------
