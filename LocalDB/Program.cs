@@ -1,9 +1,20 @@
 ﻿using System.Data;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 try
 {
-    var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Database.mdf;TrustServerCertificate=True";
+    // --------------------
+    // Get ConnectionString
+    // --------------------
+    var configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())      // Optional
+        .AddJsonFile("appsettings.json", false, true)
+        .Build();
+
+    var connectionString = configuration.GetConnectionString("KlantenDB");
+
+    //var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Database.mdf;TrustServerCertificate=True";
 
     // ----------
     // Connection
@@ -18,7 +29,7 @@ try
     comKlanten.CommandText = "select Voornaam, Familienaam from klanten";
 
     connection.Open();
-    Console.WriteLine("Database geopend");
+    Console.WriteLine("Database geöpend");
 
     // ------
     // Reader
